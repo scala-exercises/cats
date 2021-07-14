@@ -141,7 +141,12 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
    *         }
    *       }
    *     def tailRecM[A, B](a: A)(f: A => OptionT[F, Either[A, B]]): OptionT[F, B] =
-   *       defaultTailRecM(a)(f)
+   *       OptionT {
+   *         F.tailRecM(a)(a0 => F.map(f(a0).value) {
+   *           case None => Either.right[A, Option[B]](None)
+   *           case Some(b0) => b0.map(Some(_))
+   *         })
+   *       }
    *   }
    * }
    * }}}
