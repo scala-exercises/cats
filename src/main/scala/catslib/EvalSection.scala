@@ -102,7 +102,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
     val n       = 2
     var counter = 0
     val lazyEval = Eval.later {
-      println("This is lazyly evaluated with caching")
+      println("This is lazily evaluated with caching")
       counter = counter + 1
       (1 to n)
     }
